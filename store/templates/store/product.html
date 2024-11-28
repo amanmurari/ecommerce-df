@@ -1,0 +1,265 @@
+ 
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{product.image.url}}" alt="..." /></div>
+            <div class="col-md-6">
+                <div class="small mb-1">SKU: BST-498</div>
+                <h1 class="display-5 fw-bolder">{{product.title}}</h1>
+                <div class="fs-5 mb-5">
+                    {% if product.sale_price is not None %}
+                    <span class="text-decoration-line-through">${{product.price}}</span>
+                    <span>${{product.sale_price}}</span>
+                    {% else %}
+                    <span>${{product.price}}</span>
+                    {% endif %}
+                </div>
+                <p class="lead">{{product.subtitle}}</p>
+                <div class="d-flex">
+                    
+                    {% if user.is_authenticated %}
+                    {% if cart %}
+                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                    <button class="btn btn-outline-dark flex-shrink-0 fa-beat-fade" id="atc"  data-toggle="modal" data-target="#exampleModal" type="button" onclick="addtocart({{product.id}},'{{user.username}}')">
+                        <i class="bi-cart-fill me-1"></i>
+                        Add to cart
+                    </button>
+                    {% else %}
+                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" disabled />
+                    <button class="btn btn-outline-dark flex-shrink-0"  data-toggle="modal" data-target="#exampleModal" type="button">
+                        <i class="fa-solid fa-check" style="color: #63E6BE;"></i>
+                        Added
+                    </button>
+                    {% endif %}
+                    {% else %}
+                    <a class="btn btn-outline-dark flex-shrink-0 fa-beat-fade" href="/account/login">
+                        <i class="bi-cart-fill me-1"></i>
+                        Add to cart
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+<ul class="nav nav-fill nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="fill-tab-0" data-bs-toggle="tab" href="#fill-tabpanel-0" role="tab" aria-controls="fill-tabpanel-0" aria-selected="true"> Description </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="fill-tab-1" data-bs-toggle="tab" href="#fill-tabpanel-1" role="tab" aria-controls="fill-tabpanel-1" aria-selected="false"> Vendor </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="fill-tab-2" data-bs-toggle="tab" href="#fill-tabpanel-2" role="tab" aria-controls="fill-tabpanel-2" aria-selected="false"> Reviews </a>
+    </li>
+  </ul>
+  <div class="tab-content pt-5" id="tab-content">
+    <div class="tab-pane active" id="fill-tabpanel-0" role="tabpanel" aria-labelledby="fill-tab-0">
+        <div class="container center">
+            <h3>Product Description</h3>
+            <p>{{product.description}}</p>
+        </div>
+    </div>
+    <div class="tab-pane" id="fill-tabpanel-1" role="tabpanel" aria-labelledby="fill-tab-1">
+
+
+    </div>
+    <div class="tab-pane" id="fill-tabpanel-2" role="tabpanel" aria-labelledby="fill-tab-2">
+         
+        {% for review in reviews %}
+        <section class="p-4 p-md-5 text-center text-lg-start shadow-1-strong rounded" style="
+            background-image: url(https://mdbcdn.b-cdn.net/img/Photos/Others/background2.webp);
+        ">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-10">
+                <div class="card">
+                    <div class="card-body m-3">
+                    <div class="row">
+                        <div class="col-lg-4 d-flex justify-content-center align-items-center mb-4 mb-lg-0">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20%2810%29.webp"
+                            class="rounded-circle img-fluid shadow-1" alt="woman avatar" width="200" height="200" />
+                        </div>
+                        <div class="col-lg-8">
+                        <p class="text-muted fw-light mb-4">
+                           {{review.review}}
+                        </p>
+                        <p class="fw-bold lead mb-2"><strong>{{review.user.username}}</strong></p>
+                        
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+        {% endfor %}
+        <section class="p-4 p-md-5 text-center text-lg-start shadow-1-strong rounded" style="
+        background-image: url(https://mdbcdn.b-cdn.net/img/Photos/Others/background2.webp);
+    ">
+        {% if user.is_authenticated %} 
+       <div style="width: 50%; margin: 0 auto">
+   
+      
+      
+      <div class="form-label-group">
+        <textarea col=30 row=30 class="form-control" id="review" placeholder="write your openian of this product"></textarea>
+        
+      </div>
+      <br> <br>
+      <div class="form-label-group">
+        <input type="number" max="5" min="1" class="form-control" id="rate" placeholder="write star 1 to 5">
+      </div>
+      <br> <br>
+     
+      
+
+     
+      <button class="btn btn-lg btn-primary btn-block form-control" onclick=rater({{product.id}},"{{user.username}}")>Submit</button>
+      {% else %}
+      <div class="text-center">
+      <p class="fw-bold text-muted mb-0">please Login than write your Reviews</p>
+     <a href="{% url 'login' %}"><button class="btn btn-primary">Log In</button>
+      </div>
+      {% endif %}
+    </section>
+      <script src="{% static 'js/custom.js' %}"></script>
+    </div>
+  </div>
+<!-- Related items section-->
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">Related products</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Fancy Product</h5>
+                            <!-- Product price-->
+                            $40.00 - $80.00
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Special Item</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- Product price-->
+                            <span class="text-muted text-decoration-line-through">$20.00</span>
+                            $18.00
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Sale Item</h5>
+                            <!-- Product price-->
+                            <span class="text-muted text-decoration-line-through">$50.00</span>
+                            $25.00
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Popular Item</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- Product price-->
+                            $40.00
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        ...
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+    </div>
+</div>
+</div>
+{% endblock content %}
