@@ -42,7 +42,7 @@ INSTALLED_APPS = [
    "uauth",
    "store",
    "wishlist",
-   "customer",
+   "order",
 ]
 
 MIDDLEWARE = [
