@@ -13,6 +13,7 @@ def home(request):
     context={
         "products":products
     }
+    
     return render(request,"store/index.html",context)
 
 
