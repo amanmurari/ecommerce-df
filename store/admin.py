@@ -24,4 +24,9 @@ class CartAdim(admin.ModelAdmin):
 @admin.register(Rateing)
 class CartAdim(admin.ModelAdmin):
     list_display= ['product',"user","star","review"]
+
+
+@admin.register(Order)
+class ProductAdim(admin.ModelAdmin):
+    list_display=["city"]
     

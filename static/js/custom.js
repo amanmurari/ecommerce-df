@@ -86,9 +86,9 @@ async function updatecart(ids,pid,uid){
     
     var noi= document.getElementById(uid+ids)
     var price = document.getElementById("p"+ids)
+    var total=document.getElementById("total-price")
     
-    
-    
+    console.log("hrllo",total)
     var responce=await fetch("/cart/update/",{
         method:"POST",
         body: JSON.stringify({
@@ -107,6 +107,7 @@ async function updatecart(ids,pid,uid){
     console.log(data)
     if(data.status==200){
         console.log(data)
+        total.innerText=data.total
         price.innerText="$"+data.price
     }else{
     }   
@@ -115,10 +116,6 @@ async function updatecart(ids,pid,uid){
 
 
 async function deletecart(ele,ids){
-    
-    
-    
-    
     
     var responce=await fetch("/cart/delete/",{
         method:"POST",
@@ -141,3 +138,41 @@ async function deletecart(ele,ids){
     }   
     
 }
+
+
+
+async function add_address(uid){ 
+    var fn= document.getElementById("fullName")
+    var country = document.getElementById("country")
+    var state=document.getElementById("state")
+    var city=document.getElementById("city")
+    var mob=document.getElementById("mobile")
+    var adss=document.getElementById("address")
+    var sect=document.getElementById("sect")
+    console.log("hrllo",total)
+    var responce=await fetch("/cart/update/",{
+        method:"POST",
+        body: JSON.stringify({
+            fn:fn.value,
+            country:country.value,
+            state:state.value,
+            city:city.value,
+            mob:mob.value,
+            adss:adss,
+            uid:uid
+        }),
+        credentials: "same-origin",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+
+    })
+    var data= await responce.json()
+    console.log(data)
+    if(data.status==200){
+        sect.innerHTML=""
+    }else{
+    }   
+    
+}
+

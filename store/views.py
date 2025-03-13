@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 import json
 from django.http import JsonResponse
-
+from .chat import chain
 from .models import Products,User,Rateing,Cart
 from django.views.decorators.csrf import csrf_exempt
 
@@ -26,7 +26,6 @@ def product_details(request,num,name):
         if Cart.objects.filter(product__id=product.id,user__id=request.user.id):
             cart=False
 
-    print(cart)
     context={
         "product":product,
         "product_list":product_list,
@@ -47,7 +46,6 @@ def rate(request):
     if request.method=="POST":
         try:
             data= json.load(request)
-            print(data)
             review= data["review"]
             star= data["star"]
             u_id= data["uid"]
@@ -64,4 +62,15 @@ def rate(request):
     else:
         return JsonResponse({"status":404})
 
+
+@csrf_exempt
+def chatter(request):
+    if request.method=="POST":
+        data= json.load(request)
+        mes= data["message"]
+       
+        ans=chain.invoke({"human_input":mes})["text"]
         
+        return JsonResponse({"status":200,"message":ans})
+    else:
+        return JsonResponse({"status":404})

@@ -1,0 +1,195 @@
+{% extends "store/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<style>
+    :root {
+        --primary: #FFB6C1;
+        --primary-foreground: #333333;
+        --secondary: #FFC0CB;
+        --secondary-foreground: #333333;
+        --accent: #FF69B4;
+        --accent-foreground: #ffffff;
+        --background: #F5F5F5;
+        --foreground: #333333;
+        --card: #ffffff;
+        --card-foreground: #333333;
+        --border: #e0e0e0;
+        --input: #ffffff;
+        --ring: rgba(255, 182, 193, 0.5);
+    }
+    
+    body {
+        background-color: var(--background);
+        color: var(--foreground);
+    }
+    
+    .fade-in {
+        animation: fadeIn 0.6s ease-in;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .form-floating > .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 0.25rem var(--ring);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(to right, var(--primary), var(--accent));
+        border: none;
+        transition: transform 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: scale(1.02);
+        background: linear-gradient(to right, var(--accent), var(--primary));
+    }
+    
+    .order-summary {
+        background: var(--card);
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        animation: slideIn 0.8s ease-out;
+    }
+    
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    
+    .form-floating > .form-control:not(:placeholder-shown) ~ label {
+        color: var(--primary-foreground);
+    }
+    
+    .form-floating > .form-control:focus ~ label {
+        color: var(--accent);
+    }
+    
+    @media (max-width: 768px) {
+        .order-summary {
+            margin-top: 2rem;
+        }
+    }
+    
+    .order-items {
+        font-size: 0.95rem;
+    }
+    
+    hr {
+        border-color: var(--border);
+        opacity: 0.5;
+    }
+    
+    .card-title {
+        color: var(--primary-foreground);
+    }
+    
+    .form-control.is-invalid {
+        border-color: var(--accent);
+        background-image: none;
+    }
+    
+    .invalid-feedback {
+        color: var(--accent);
+        animation: slideUp 0.3s ease;
+    }
+    
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+    <div class="container py-5 fade-in">
+        <div class="row g-5">
+            <div class="col-md-7 col-lg-8" id="sect">
+                <h4 class="mb-4">Billing Information</h4>
+                <form class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+                                <label for="fullName">Full Name</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="country" placeholder="Enter the country name" required>
+                                <label for="fullName">Country</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="state" placeholder="Enter your state name" required>
+                                <label for="fullName">State</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="city" placeholder="Enter your city name" required>
+                                <label for="fullName">city</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="mobile" placeholder="Enter your mobile number" required>
+                                <label for="email">mobile no.</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="address" placeholder="Enter your Shipping Address" required>
+                                <label for="address">Shipping Address</label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <button class="btn btn-primary btn-lg w-100 mt-4" onclick="add_address('{{user.username}}')">Order now</button>
+                </form>
+            </div>
+            <div class="col-md-5 col-lg-4">
+                <div class="card order-summary">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Order Summary</h4>
+                        <div class="order-items">
+                            {% if carts is not None %}
+                             {% for cart in carts %}
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>{{cart.product.title}}</span>
+                                <span>${% if product.sale_price is not None %}{{cart.price.0}}{% else %}{{cart.price}}{% endif %}</span>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+  
+                           
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal</span>
+                            <span>${{total}}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Shipping</span>
+                            <span>$9.99</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <strong>Total</strong>
+                            <strong>${{total}}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+<script src="{% static 'js/custom.js' %} ">
+
+
+    {% endblock content %}
+    

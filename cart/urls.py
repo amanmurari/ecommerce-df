@@ -5,4 +5,5 @@ urlpatterns=[
     path("delete/",delete_cart),
     path("update/",update_cart),
     path("add/",add_cart),
+     path("checkout/",checkout),
 ]

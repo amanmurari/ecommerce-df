@@ -2,7 +2,7 @@ from django.db import models
 import uuid
 from django.contrib.auth.models import User
 from django.utils.html import html_safe
-from ckeditor.fields import RichTextField
+#from ckeditor.fields import RichTextField
 # Create y.our models here.
 USER_type= {
      "vendor":"vendor",
@@ -97,35 +97,15 @@ class Products(models.Model):
 
 
 class Order(models.Model):
-     
-
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order_user', blank=True, null=True)
-    first_name_order = models.CharField(max_length=255, blank=False, null=False)
-    last_name_order = models.CharField(max_length=255, blank=False, null=False)
-    delivery_method_order = models.IntegerField(choices=DELIVERY_METHODS, default=1, blank=False, null=False)
-    payment_method_order = models.IntegerField(choices=PAYMENT_METHODS, default=1, blank=False, null=False)
-    country_order = models.CharField(max_length=255, blank=False, null=False)
-    city_order = models.CharField(max_length=255, blank=False, null=False)
-    street_order = models.CharField(max_length=255, blank=False, null=False)
-    house_number_order = models.CharField(max_length=255, blank=False, null=False)
-    zip_code_order = models.CharField(max_length=255, blank=False, null=False)
-    phone_number_order = models.CharField(max_length=255, blank=False, null=False)
-    email_order = models.EmailField(max_length=255, blank=False, null=False)
+    full_name = models.CharField(max_length=255,)
+    country = models.CharField(max_length=255)
+    state = models.IntegerField(choices=DELIVERY_METHODS, default=1, blank=False, null=False)
+    city = models.CharField(max_length=255, blank=False, null=False)
+    street = models.CharField(max_length=255, blank=False, null=False)
+    total= models.IntegerField()
     date_time_order = models.DateTimeField(auto_now=True, blank=False, null=False)
 
-
-class OrderProduct(models.Model):
-    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='orderproduct_product', blank=False, null=False)
-    quantity = models.FloatField(default=1.0, blank=False, null=False)
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='orderproduct_order_id', blank=True, null=True)
-
-    @property
-    def get_total(self):
-        total = self.product.price * self.quantity
-        return total
-    
-    def __str__(self):
-        return str(self.id)
 
 
 class Cart(models.Model):

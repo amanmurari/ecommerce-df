@@ -28,7 +28,7 @@ def loginu(request):
                 pass1= form.cleaned_data['password']
                 try:
                     d= User.objects.get(email=email)
-                    data= authenticate(request,email=email,password=pass1)
+                    data= authenticate(username=d,password=pass1)
                     print(data)
                     if data is not None:
                         print(form.is_valid())

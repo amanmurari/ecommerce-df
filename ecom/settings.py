@@ -42,7 +42,7 @@ INSTALLED_APPS = [
    "uauth",
    "store",
    "wishlist",
-   "order",
+
 ]
 
 MIDDLEWARE = [
@@ -78,7 +78,6 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

@@ -1,0 +1,182 @@
+Metadata-Version: 2.1
+Name: django-ckeditors
+Version: 0.2.5
+Summary: CKEditors for Django.
+Author-email: Vladislav Khoboko <vladislah@gmail.com>, Mark Sevelj <mark.sevelj@dunwright.com.au>
+License: BSD-3-Clause
+Project-URL: homepage, https://pypi.org/project/django-ckeditors/
+Project-URL: repository, https://github.com/imAsparky/django-ckeditors.git
+Keywords: CKEditor,CKEditors,Django
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.2
+Classifier: Framework :: Django :: 3.0
+Classifier: Framework :: Django :: 4.0
+Classifier: Framework :: Django :: 5.0
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Requires-Python: >=3.7
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: Django >=2.2
+Requires-Dist: Pillow
+Requires-Dist: filetype
+Provides-Extra: dev
+Requires-Dist: bandit[toml] ==1.7.6 ; extra == 'dev'
+Requires-Dist: black ==22.12.0 ; extra == 'dev'
+Requires-Dist: codespell ==2.2.2 ; extra == 'dev'
+Requires-Dist: coverage ==7.4.0 ; extra == 'dev'
+Requires-Dist: mypy ==1.8.0 ; extra == 'dev'
+Requires-Dist: mypy-extensions ==1.0.0 ; extra == 'dev'
+Requires-Dist: pytest ==7.4.4 ; extra == 'dev'
+Requires-Dist: pytest-cov ==4.0.0 ; extra == 'dev'
+Requires-Dist: pytest-django ==4.5.2 ; extra == 'dev'
+Requires-Dist: pytest-mock ==3.10.0 ; extra == 'dev'
+Requires-Dist: ruff ; extra == 'dev'
+Requires-Dist: safety ==2.3.5 ; extra == 'dev'
+Requires-Dist: types-setuptools ==65.6.0.2 ; extra == 'dev'
+Requires-Dist: typing-extensions ==4.9.0 ; extra == 'dev'
+
+
+Django CKEditors |Docs| |Django| |Repo|
+=======================================
+
+|
+
+    **CKEditor 5 Integration for Django >= 2.0**
+
+    Vendored from this excellent project: https://github.com/hvlads/django-ckeditor-5
+
+|
+
+Licenses
+--------
+
+|
+
+    **Django:** BSD 3-Clause "New" or "Revised" License
+
+    **CKEditor 5:** GPL 2+ copyleft license
+
+|
+
+What is django-ckeditors
+------------------------
+
+django-ckeditors: A Powerful and Versatile Rich Text Editor for Your Django Projects
+
+* Seamlessly integrate the renowned CKEditor 5 into your Django website.
+* Provide your users with a modern and intuitive content creation experience.
+* Includes features like text formatting, image uploads, tables, code blocks, and more.
+* Highly customizable to fit your project's exact needs.
+
+"django-ckeditor-5 provides a strong foundation, and I'm building upon it with customizations that align perfectly with my project's needs."
+
+|
+
+See the Quickstart: `here <https://django-ckeditors.readthedocs.io/en/latest/how-to/quickstart.html>`__
+
+|
+
+Ideal For:
+
+    * Blogs
+    * Content Management Systems (CMS)
+    * Websites requiring advanced text editing features
+
+**Includes the following CKEditor 5 plugins:**
+
+* **Text Formatting**
+    * **Basic:**
+        * Bold
+        * Italic
+        * Underline
+        * Strikethrough
+        * Superscript
+        * Subscript
+        * Code
+    * **Paragraph and Structure:**
+        * BlockQuote
+        * Heading
+        * Paragraph
+        * Alignment
+
+    * **Lists:**
+        * List
+        * TodoList
+        * ListProperties
+
+    * **Advanced:**
+        * Highlight
+        * Indent
+        * IndentBlock
+
+
+* **Images and Media**
+    * **Core:**
+        * Image
+        * ImageCaption
+        * ImageStyle
+        * ImageToolbar
+        * ImageResize
+        * ImageInsert
+        * LinkImage
+
+    * **Upload:**
+        * UploadAdapter
+        * SimpleUploadAdapter
+
+    * **Embedding:**
+        * MediaEmbed
+        * HtmlEmbed
+
+* **Other**
+    * **Link:**
+        * Link
+
+    * **Table:**
+        * Table
+        * TableToolbar
+        * TableCaption
+        * TableProperties
+        * TableCellProperties
+
+    * **Style:**
+        * Font
+        * Style
+        * HorizontalLine
+
+    * **Editing Tools:**
+        * CodeBlock
+        * Autoformat
+        * PasteFromOffice
+        * RemoveFormat
+        * SourceEditing
+        * GeneralHtmlSupport
+
+    * **Word Processing Features**
+        * WordCount
+        * Mention
+
+|
+
+.. |Docs| image:: https://readthedocs.org/projects/django-ckeditors/badge/?version=latest
+    :target: https://django-ckeditors.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+.. |Django| image:: https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FimAsparky%2Fdjango-ckeditors%2Fmain%2Fpyproject.toml&query=project.dependencies&logo=Django&label=Versions&labelColor=%23092E20
+   :target: https://docs.djangoproject.com/en/4.2/
+   :alt: Django Version Badge
+.. |Repo| image:: https://www.repostatus.org/badges/latest/wip.svg
+   :target: https://www.repostatus.org/#wip
+   :alt: Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.
