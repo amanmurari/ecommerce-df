@@ -13,6 +13,7 @@ Django==5.1.4
 django-ckeditors==0.2.5
 django-jazzmin==3.0.1
 exceptiongroup==1.2.2
+faiss-cpu==1.9.0.post1
 filetype==1.2.0
 frozenlist==1.5.0
 greenlet==3.1.1
